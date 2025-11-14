@@ -20,7 +20,6 @@ public class BirdScript : MonoBehaviour
         if (keyboard.spaceKey.wasPressedThisFrame)
         {
             myRigidbody.linearVelocity = Vector2.up * upwardsVelocity;
-            print(myRigidbody.linearVelocity);
         }
     }
 }
