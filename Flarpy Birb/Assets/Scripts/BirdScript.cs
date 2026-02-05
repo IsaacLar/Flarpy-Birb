@@ -21,15 +21,28 @@ public class BirdScript : MonoBehaviour
         //Input using the new Input System Package
         var keyboard = Keyboard.current;
 
-        if (keyboard.spaceKey.wasPressedThisFrame)
+        if (keyboard.spaceKey.wasPressedThisFrame && birdIsAlive)
         {
             myRigidbody.linearVelocity = Vector2.up * upwardsVelocity;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void killBird()
     {
         birdIsAlive = false;
         logic.gameOver();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            killBird();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        killBird();
     }
 }

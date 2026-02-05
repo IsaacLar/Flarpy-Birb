@@ -5,6 +5,7 @@ public class PipeSpawnScript : MonoBehaviour
 
     //Reference to the pipe game object prefab
     public GameObject pipe;
+    public GameObject movingPipe;
 
     //Seconds between each pipe being spawned
     public float spawnRate = 3.5f;
