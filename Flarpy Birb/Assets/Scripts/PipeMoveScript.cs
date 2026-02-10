@@ -19,6 +19,8 @@ public class PipeMoveScript : MonoBehaviour
     private int minGap = 44;
     private float maxGap;
 
+    public float vertMove = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,7 +34,12 @@ public class PipeMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+        transform.position += new Vector3(-1, vertMove, 0) * moveSpeed * Time.deltaTime;
+
+        if (topPipe.transform.position.y > 34 || bottomPipe.transform.position.y < -34)
+        {
+            vertMove = -vertMove;
+        }
 
         if (transform.position.x < deadZone)
         {
