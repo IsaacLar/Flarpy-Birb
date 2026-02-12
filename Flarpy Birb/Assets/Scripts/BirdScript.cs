@@ -4,7 +4,11 @@ using UnityEngine.InputSystem;
 public class BirdScript : MonoBehaviour
 {
     public Rigidbody2D myRigidbody;
+    [HideInInspector]
     public LogicScript logic;
+    
+    public AudioSource birdFlap;
+    public AudioSource birdDie;
 
     public int upwardsVelocity;
     public bool birdIsAlive = true;
@@ -24,18 +28,20 @@ public class BirdScript : MonoBehaviour
         if (keyboard.spaceKey.wasPressedThisFrame && birdIsAlive)
         {
             myRigidbody.linearVelocity = Vector2.up * upwardsVelocity;
+            birdFlap.Play();
         }
     }
 
     private void killBird()
     {
         birdIsAlive = false;
+        birdDie.Play();
         logic.gameOver();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 6 && birdIsAlive)
         {
             killBird();
         }
@@ -43,6 +49,9 @@ public class BirdScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        killBird();
+        if (birdIsAlive)
+        {
+            killBird();
+        }
     }
 }
