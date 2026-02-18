@@ -6,7 +6,9 @@ public class BirdScript : MonoBehaviour
     public Rigidbody2D myRigidbody;
     [HideInInspector]
     public LogicScript logic;
-    
+    public Globalscript Global;
+
+
     public AudioSource birdFlap;
     public AudioSource birdDie;
 
@@ -25,7 +27,7 @@ public class BirdScript : MonoBehaviour
         //Input using the new Input System Package
         var keyboard = Keyboard.current;
 
-        if (keyboard.spaceKey.wasPressedThisFrame && birdIsAlive)
+        if (keyboard.spaceKey.wasPressedThisFrame && birdIsAlive && !Global.isPaused)
         {
             myRigidbody.linearVelocity = Vector2.up * upwardsVelocity;
             birdFlap.Play();
